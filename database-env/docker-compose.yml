@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  # MySQL
+  db:
+    image: mysql:5.7
+    container_name: mysql_yui
+    environment:
+      MYSQL_ROOT_PASSWORD: yuichan
+      MYSQL_DATABASE: kigyo
+      MYSQL_USER: kigyo_user
+      MYSQL_PASSWORD: 12345678
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    volumes:
+    - ./docker/db/data:/var/lib/mysql
+    - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+    - ./docker/db/sql:/docker-entrypoint-initdb.d
+    ports:
+    - 3350:3306
